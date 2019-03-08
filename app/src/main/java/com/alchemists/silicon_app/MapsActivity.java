@@ -1,18 +1,32 @@
 package com.alchemists.silicon_app;
 
+import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private FusedLocationProviderClient fusedLocationClient;
+    public void updateMap(Location newLoc){
+        LatLng latest = new LatLng(newLoc.getLatitude(),newLoc.getLongitude());
+
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latest));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latest,14));
+
+        mMap.addMarker(new MarkerOptions().position(latest).title("My Loc"));
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +36,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            updateMap(location);
+                        }
+                    }
+                });
     }
 
 

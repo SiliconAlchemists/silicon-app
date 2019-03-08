@@ -7,5 +7,27 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="edittext_details">
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:textSize">20sp</item>
+
+        <item name="android:textColorHint">#757575</item>
+        <item name="android:layout_marginLeft">60sp</item>
+        <item name="android:layout_marginRight">35sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">#000000</item>
+
+
+    </style>
+    <style name="checkbox_details">
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:textSize">15sp</item>
+
+        <item name="android:layout_marginLeft">160sp</item>
+        <item name="android:layout_marginRight">60sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#bdbdbd</item>
+
+    </style>
 
 </resources>

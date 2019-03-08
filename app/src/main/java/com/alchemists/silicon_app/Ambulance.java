@@ -8,7 +8,7 @@ import android.view.View;
 public class Ambulance extends AppCompatActivity {
 
     public void loginUser(View view){
-        Intent i = new Intent(getApplicationContext(),MapsActivity.class);
+        Intent i = new Intent(getApplicationContext(),TestSend.class);
         startActivity(i);
 
 

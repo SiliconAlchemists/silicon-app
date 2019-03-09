@@ -1,13 +1,17 @@
 package com.alchemists.silicon_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.JsonReader;
+import android.util.Log;
 import android.view.View;
 
 import android.app.Activity;
@@ -20,10 +24,23 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
+import okio.ByteString;
 
 public class AccelData extends Activity implements SensorEventListener {
 
     private float lastX, lastY, lastZ;
+
+    public OkHttpClient client;
 
     private SensorManager sensorManager;
     private Sensor accelerometer;
@@ -45,11 +62,79 @@ public class AccelData extends Activity implements SensorEventListener {
 
     public Vibrator v;
 
+
+
+
+    private final class EchoWebSocketListener extends WebSocketListener {
+        private static final int NORMAL_CLOSURE_STATUS = 1000;
+
+        @Override
+        public void onOpen(final WebSocket webSocket, Response response) {
+            JSONObject rObj = new JSONObject();
+
+            try {
+                rObj.put("x",deltaX);
+                rObj.put("y",deltaY);
+                rObj.put("z",deltaZ);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            webSocket.send(rObj.toString());
+
+        }
+
+        @Override
+        public void onMessage(final WebSocket webSocket, String text) {
+            JSONObject rObj = new JSONObject();
+
+            try {
+                rObj.put("x",deltaX);
+                rObj.put("y",deltaY);
+                rObj.put("z",deltaZ);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            webSocket.send(rObj.toString());
+
+        }
+
+
+        @Override
+        public void onClosed(WebSocket webSocket, int code, String reason) {
+            super.onClosed(webSocket, code, reason);
+            Toast.makeText(getApplicationContext(), "Conn closed", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onMessage(WebSocket webSocket, ByteString bytes) {
+            Toast.makeText(getApplicationContext(), "nigger", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onClosing(WebSocket webSocket, int code, String reason) {
+            webSocket.close(NORMAL_CLOSURE_STATUS, null);
+//            output("Closing : " + code + " / " + reason);
+        }
+
+        @Override
+        public void onFailure(WebSocket webSocket, Throwable t, Response response) {
+//            output("Error : " + t.getMessage());
+        }
+    }
+    private void start() {
+        Request request = new Request.Builder().url("ws://10.177.7.176:3006/getGyroPhoneTest").build();
+        AccelData.EchoWebSocketListener listener = new AccelData.EchoWebSocketListener();
+        WebSocket ws = client.newWebSocket(request, listener);
+        client.dispatcher().executorService().shutdown();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accel_data);
         initializeViews();
+
+        client = new OkHttpClient();
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
@@ -67,6 +152,7 @@ public class AccelData extends Activity implements SensorEventListener {
 
         //initialize vibration
         v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        start();
 
     }
 

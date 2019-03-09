@@ -71,10 +71,30 @@ public class User extends AppCompatActivity {
 
         @Override
         public void onMessage(WebSocket webSocket, String text) {
-//            Toast.makeText(User.this, text, Toast.LENGTH_SHORT).show();
-//            output("Receiving : " + text);
-            Log.d("UserReply",text);
+//           Log.d("ReplyInfo",text);
+           String four="404ncc";
+            JSONObject obj;
+            try {
+                obj = new JSONObject(text);
+
+            if(text!=four){
+//                Log.d("ReplyInfo",text);
+                UserData.get().setEmail(obj.getString("email"));
+                UserData.get().setName(obj.getString("username"));
+                Intent DashboardIntent = new Intent(User.this, DashboardActivity.class);
+                startActivity(DashboardIntent);
+            }
+            else {
+                //login failed
+                Log.d("ReplyInfo","else");
+            }
+            //convert text  to strings and assign em
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.d("ReplyInfo","catch", e);
+            }
         }
+
 
         @Override
         public void onMessage(WebSocket webSocket, ByteString bytes) {

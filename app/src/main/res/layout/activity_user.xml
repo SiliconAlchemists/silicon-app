@@ -52,7 +52,6 @@
             android:layout_gravity="center"
             android:layout_margin="60dp"
             android:background="#757575"
-            android:onClick="start"
             android:text="SUBMIT" />
         <TextView
             android:id="@+id/registertextview"

@@ -118,15 +118,15 @@
                 android:id="@+id/specia_id"/>
 
 
-
             <Button
+                android:id="@+id/submit_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="60dp"
                 android:background="#757575"
-                android:text="SUBMIT"
-                android:id="@+id/submit_id"/>
+                android:onClick="sendData"
+                android:text="SUBMIT" />
 
 
         </LinearLayout>

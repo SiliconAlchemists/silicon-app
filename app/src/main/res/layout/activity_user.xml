@@ -25,12 +25,14 @@
             tools:ignore="UnusedAttribute" />
 
         <EditText
+            android:id="@+id/emailVal"
             style="@style/edittext_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email ID" />
 
         <EditText
+            android:id="@+id/passVal"
             style="@style/edittext_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,11 +46,13 @@
             android:text="Remember" />
 
         <Button
+            android:id="@+id/registerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="60dp"
             android:background="#757575"
+            android:onClick="start"
             android:text="SUBMIT" />
         <TextView
             android:id="@+id/registertextview"

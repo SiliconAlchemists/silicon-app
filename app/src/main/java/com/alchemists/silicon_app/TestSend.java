@@ -8,6 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -26,10 +30,21 @@ public class TestSend extends AppCompatActivity {
 
         @Override
         public void onOpen(WebSocket webSocket, Response response) {
-            webSocket.send("Hello, it's SSaurel !");
-            webSocket.send("What's up ?");
-            webSocket.send(ByteString.decodeHex("deadbeef"));
-            webSocket.close(NORMAL_CLOSURE_STATUS, "Goodbye !");
+            JSONObject student1 = new JSONObject();
+            try {
+                student1.put("id", "3");
+                student1.put("name", "NAME OF STUDENT");
+                student1.put("year", "3rd");
+                student1.put("curriculum", "Arts");
+                student1.put("birthday", "5/5/1993");
+
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            webSocket.send(student1.toString());
+
         }
 
         @Override
@@ -70,7 +85,7 @@ public class TestSend extends AppCompatActivity {
     }
 
     private void start() {
-        Request request = new Request.Builder().url("ws://10.177.7.176:3006/echo").build();
+        Request request = new Request.Builder().url("ws://10.177.7.176:3006/signinws").build();
         EchoWebSocketListener listener = new EchoWebSocketListener();
         WebSocket ws = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();
@@ -84,5 +99,6 @@ public class TestSend extends AppCompatActivity {
             }
         });
     }
+
 }
 

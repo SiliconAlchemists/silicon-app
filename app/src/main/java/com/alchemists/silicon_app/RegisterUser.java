@@ -1,20 +1,12 @@
 package com.alchemists.silicon_app;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -23,7 +15,7 @@ import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 import okio.ByteString;
 
-public class RegisterData extends AppCompatActivity {
+public class RegisterUser extends AppCompatActivity {
 
     private OkHttpClient client;
 
@@ -82,7 +74,7 @@ public class RegisterData extends AppCompatActivity {
     }
     private void start() {
         Request request = new Request.Builder().url("ws://10.177.7.176:3006/echo").build();
-        RegisterData.EchoWebSocketListener listener = new RegisterData.EchoWebSocketListener();
+        RegisterUser.EchoWebSocketListener listener = new RegisterUser.EchoWebSocketListener();
         WebSocket ws = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();
     }

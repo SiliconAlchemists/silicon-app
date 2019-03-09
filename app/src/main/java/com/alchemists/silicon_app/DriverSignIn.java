@@ -12,8 +12,6 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.StringReader;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -21,9 +19,7 @@ import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 import okio.ByteString;
 
-import static org.xmlpull.v1.XmlPullParser.TEXT;
-
-public class Ambulance extends AppCompatActivity {
+public class DriverSignIn extends AppCompatActivity {
 
     public void loginUser(View view){
         Intent i = new Intent(getApplicationContext(),TestSend.class);
@@ -78,9 +74,9 @@ public class Ambulance extends AppCompatActivity {
                 Log.e("My App", "Could not parse malformed JSON: \"" + text + "\"");
             }
             if(text!="404"){
-                DriverData.get().setEmail("nigger");
-                DriverData.get().setName("nish");
-                DriverData.get().setPhone("80533");
+                DriverSingleton.get().setEmail("nigger");
+                DriverSingleton.get().setName("nish");
+                DriverSingleton.get().setPhone("80533");
 
                 //start dashboard activity for driver
             }
@@ -118,7 +114,7 @@ public class Ambulance extends AppCompatActivity {
     }
     private void start() {
         Request request = new Request.Builder().url("ws://10.177.7.176:3006/signinwsambulance").build();
-        Ambulance.EchoWebSocketListener listener = new Ambulance.EchoWebSocketListener();
+        DriverSignIn.EchoWebSocketListener listener = new DriverSignIn.EchoWebSocketListener();
         WebSocket ws = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();
     }

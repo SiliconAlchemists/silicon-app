@@ -1,18 +1,16 @@
 package com.alchemists.silicon_app;
 
-import android.content.Context;
+public class UserSingleton {
+    private static UserSingleton sUserSingleton;
 
-public class UserData {
-    private static UserData sUserData;
-
-    public static UserData get() {
-        if (sUserData == null) {
-            sUserData = new UserData();
+    public static UserSingleton get() {
+        if (sUserSingleton == null) {
+            sUserSingleton = new UserSingleton();
         }
-        return sUserData;
+        return sUserSingleton;
     }
 
-        private UserData(){
+        private UserSingleton(){
 
         }
         private String name;

@@ -1,6 +1,5 @@
 package com.alchemists.silicon_app;
 
-import android.content.Intent;
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 
-public class DashboardActivity extends AppCompatActivity {
+public class UserDashboard extends AppCompatActivity {
 
     TextView helloText;
     LinearLayout detailLayout;
@@ -54,9 +53,9 @@ public class DashboardActivity extends AppCompatActivity {
 
                 if(text!=four){
 //                Log.d("ReplyInfo",text);
-                    UserData.get().setEmail(obj.getString("email"));
-                    UserData.get().setName(obj.getString("username"));
-                    Intent DashboardIntent = new Intent(User.this, DashboardActivity.class);
+                    UserSingleton.get().setEmail(obj.getString("email"));
+                    UserSingleton.get().setName(obj.getString("username"));
+                    Intent DashboardIntent = new Intent(UserSignIn.this, UserDashboard.class);
                     startActivity(DashboardIntent);
                 }
                 else {
@@ -75,7 +74,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void reqCon() {
         Request request = new Request.Builder().url("ws://10.177.7.176:3006/sos").build();
-        DashboardActivity.EchoWebSocketListener listener = new DashboardActivity.EchoWebSocketListener();
+        UserDashboard.EchoWebSocketListener listener = new UserDashboard.EchoWebSocketListener();
         WebSocket ws = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();
 
@@ -107,7 +106,7 @@ public class DashboardActivity extends AppCompatActivity {
                             try {
                                 obj.put("latitude",location.getLatitude());
                                 obj.put("longitude",location.getLongitude());
-                                obj.put("email",UserData.get().getEmail());
+                                obj.put("email", UserSingleton.get().getEmail());
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Log.d("jsonTag",e.toString());
@@ -121,9 +120,9 @@ public class DashboardActivity extends AppCompatActivity {
     }
     public String createSummery(){
         String onlyName;
-        String Message="Name :"+UserData.get().getName();
-        onlyName = UserData.get().getName();
-        Message=Message+"\nEmail:"+UserData.get().getEmail();
+        String Message="Name :"+ UserSingleton.get().getName();
+        onlyName = UserSingleton.get().getName();
+        Message=Message+"\nEmail:"+ UserSingleton.get().getEmail();
         detailText.setText(Message);
         helloText.setText((helloText.getText()+onlyName));
 

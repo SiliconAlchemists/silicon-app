@@ -1,16 +1,16 @@
 package com.alchemists.silicon_app;
 
-public class DriverData {
-    private static DriverData sDriverData;
+public class DriverSingleton {
+    private static DriverSingleton sDriverSingleton;
 
-    public static DriverData get() {
-        if (sDriverData == null) {
-            sDriverData = new DriverData();
+    public static DriverSingleton get() {
+        if (sDriverSingleton == null) {
+            sDriverSingleton = new DriverSingleton();
         }
-        return sDriverData;
+        return sDriverSingleton;
     }
 
-    private DriverData(){
+    private DriverSingleton(){
 
     }
     private String name;

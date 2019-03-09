@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +19,7 @@ import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 import okio.ByteString;
 
-public class User extends AppCompatActivity {
+public class UserSignIn extends AppCompatActivity {
 
     public OkHttpClient client;
 
@@ -79,9 +78,9 @@ public class User extends AppCompatActivity {
 
             if(text!=four){
 //                Log.d("ReplyInfo",text);
-                UserData.get().setEmail(obj.getString("email"));
-                UserData.get().setName(obj.getString("username"));
-                Intent DashboardIntent = new Intent(User.this, DashboardActivity.class);
+                UserSingleton.get().setEmail(obj.getString("email"));
+                UserSingleton.get().setName(obj.getString("username"));
+                Intent DashboardIntent = new Intent(UserSignIn.this, UserDashboard.class);
                 startActivity(DashboardIntent);
             }
             else {
@@ -114,7 +113,7 @@ public class User extends AppCompatActivity {
     }
     private void start() {
         Request request = new Request.Builder().url("ws://10.177.7.176:3006/signinwsuser").build();
-        User.EchoWebSocketListener listener = new User.EchoWebSocketListener();
+        UserSignIn.EchoWebSocketListener listener = new UserSignIn.EchoWebSocketListener();
         WebSocket ws = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();
     }
@@ -131,7 +130,7 @@ public class User extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create a new intent to open the {@link NumbersActivity}
-                Intent RegisterIntent = new Intent(User.this, RegisterData.class);
+                Intent RegisterIntent = new Intent(UserSignIn.this, RegisterUser.class);
 
                 // Start the new activity
                 startActivity(RegisterIntent);

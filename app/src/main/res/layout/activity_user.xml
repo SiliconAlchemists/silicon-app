@@ -1,73 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserSignIn">
+    tools:context=".DriverSignIn"
+    android:background="#424242">
 
-    <LinearLayout
-        android:id="@+id/linear"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="390dp"
-        tools:layout_editor_absoluteY="0dp">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:text="Welcome User"
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="60dp"
-            android:text="User Login Page"
-            android:textAlignment="center"
+        android:textSize="30sp"
+        style="@style/user_login"/>
 
-            android:textSize="30sp"
-            tools:ignore="UnusedAttribute" />
+    <EditText
+        android:id="@+id/emailVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="168dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Email"
+        style="@style/user_login"/>
 
-        <EditText
-            android:id="@+id/emailVal"
-            style="@style/edittext_details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email ID" />
+    <EditText
+        android:id="@+id/passVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="240dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        style="@style/user_login"/>
 
-        <EditText
-            android:id="@+id/passVal"
-            style="@style/edittext_details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword" />
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-        <CheckBox
-            style="@style/checkbox_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Remember" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="340dp"
+        android:onClick="loginUser"
+        android:text="Login" />
+    <TextView
+        android:id="@+id/registertextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="550sp"
+        android:onClick="Register"
+        android:text="Register"
+        android:textSize="20sp"
+        android:textColor="#e0e0e0"
+        tools:ignore="OnClick" />
 
-        <Button
-            android:id="@+id/registerBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="60dp"
-            android:background="#757575"
-            android:text="SUBMIT" />
-        <TextView
-            android:id="@+id/registertextview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            android:layout_marginLeft="160dp"
-            android:layout_marginTop="50sp"
-            android:onClick="Register"
-            android:textSize="20sp"
-            tools:ignore="OnClick" />
-
-
-
-
-    </LinearLayout>
-
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

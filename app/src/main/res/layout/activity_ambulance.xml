@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DriverSignIn">
+    tools:context=".DriverSignIn"
+    android:background="#424242">
 
     <TextView
         android:id="@+id/textView"
@@ -15,7 +16,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="100dp"
         android:text="Welcome Driver"
-        android:textSize="20sp" />
+
+        android:textSize="30sp"
+        style="@style/ambulance_login"/>
 
     <EditText
         android:id="@+id/driverEmail"
@@ -26,7 +29,8 @@
         android:layout_marginTop="168dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Email"/>
+        android:hint="Email"
+        style="@style/ambulance_login"/>
 
     <EditText
         android:id="@+id/driverPassword"
@@ -34,10 +38,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-
         android:layout_marginTop="240dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:hint="Password"
+        android:inputType="textPassword"
+        style="@style/ambulance_login"/>
 
     <Button
         android:id="@+id/driverLogInBtn"

@@ -3,24 +3,38 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
     <style name="edittext_details">
         <item name="android:layout_marginTop">30dp</item>
         <item name="android:textSize">20sp</item>
-
+        <item name="android:background">#424242</item>
         <item name="android:textColorHint">#757575</item>
         <item name="android:layout_marginLeft">60sp</item>
         <item name="android:layout_marginRight">35sp</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textColor">#000000</item>
+
+        <item name="android:textColor">#e0e0e0</item>
+
 
 
     </style>
+    <style name="ambulance_login">
+        <item name="android:textColor">#e0e0e0</item>
+        <item name="android:textColorHint">#757575</item>
+    </style>
+    <style name="user_login">
+        <item name="android:textColor">#e0e0e0</item>
+        <item name="android:textColorHint">#757575</item>
+    </style>
+    <style name="Main_Button">
+        <item name="android:background">@android:color/transparent</item>
 
+        <item name="android:textColor">#e0e0e0</item>
+        <item name="android:textSize">40sp</item>
+    </style>
     <style name="checkbox_details">
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:textSize">15sp</item>

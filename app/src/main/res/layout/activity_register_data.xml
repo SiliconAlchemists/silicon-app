@@ -16,15 +16,17 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="390dp"
-            tools:layout_editor_absoluteY="0dp">
+            tools:layout_editor_absoluteY="0dp"
+            android:background="#424242">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="60dp"
+                android:paddingTop="40dp"
                 android:text="Register Page"
                 android:textAlignment="center"
-                android:textSize="30sp"
+                android:textSize="35sp"
+                android:textColor="#e0e0e0"
                 tools:ignore="UnusedAttribute" />
 
             <EditText
@@ -124,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="60dp"
-                android:background="#757575"
+                android:background="#e0e0e0"
                 android:onClick="sendData"
                 android:text="SUBMIT" />
 

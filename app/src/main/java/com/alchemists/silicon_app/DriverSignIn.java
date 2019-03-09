@@ -33,6 +33,10 @@ public class DriverSignIn extends AppCompatActivity {
     EditText password;
     Button driverLoginBtn;
 
+
+    String emailVal;
+    String passVal;
+
     JSONObject student1;
 
     private final class EchoWebSocketListener extends WebSocketListener {
@@ -42,8 +46,8 @@ public class DriverSignIn extends AppCompatActivity {
         public void onOpen(WebSocket webSocket, Response response) {
             String emailvar = "Silicon@alchemist.com";
             String passvar = "passsssss";
-            String emailVal = email.getText().toString();
-            String passVal = password.getText().toString();
+            emailVal = email.getText().toString();
+            passVal = password.getText().toString();
             JSONObject driverLog = new JSONObject();
             try {
                 driverLog.put("email", emailVal);
@@ -58,22 +62,46 @@ public class DriverSignIn extends AppCompatActivity {
 
         }
 
+        public void updateDriverSingleton(String email,String name){
+            DriverSingleton.get().setEmail(email);
+            DriverSingleton.get().setName(name);
+        }
+
 
 
         @Override
         public void onMessage(WebSocket webSocket, String text) {
+            JSONObject obj=null;
             //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
             Log.d("ReplyInfo",text);
             try {
-
-                JSONObject obj = new JSONObject(text);
+                obj = new JSONObject(text);
 
                 Log.d("MyApp", obj.toString());
 
+
+            if(obj.getString("response").equals("success")){
+                Log.d("LoginStatus","Success");
+
+
+                updateDriverSingleton(obj.getString("email"),obj.getString("name"));
+
+
+                JSONObject loginReply = new JSONObject();
+                loginReply.put("status","ready");
+                loginReply.put("email",obj.getString("email"));
+
+                webSocket.send(loginReply.toString());
+
+                Intent i = new Intent(DriverSignIn.this,MapsActivity.class);
+                startActivity(i);
+            }else{
+                Log.d("LoginStatus","Failed");
+            }
             } catch (Throwable t) {
                 Log.e("My App", "Could not parse malformed JSON: \"" + text + "\"");
             }
-            if(text!="404"){
+            /*if(text!="404"){
                 DriverSingleton.get().setEmail("nigger");
                 DriverSingleton.get().setName("nish");
                 DriverSingleton.get().setPhone("80533");
@@ -82,7 +110,7 @@ public class DriverSignIn extends AppCompatActivity {
             }
             else {
                 //login failed
-            }
+            }*/
             //convert text  to strings and assign em
 
 

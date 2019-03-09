@@ -21,7 +21,7 @@ public class EntryPointMain extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create a new intent to open the {@link NumbersActivity}
-                Intent userIntent = new Intent(EntryPointMain.this, UserSignIn.class);
+                Intent userIntent = new Intent(EntryPointMain.this, AccelData.class);
 
                 // Start the new activity
                 startActivity(userIntent);

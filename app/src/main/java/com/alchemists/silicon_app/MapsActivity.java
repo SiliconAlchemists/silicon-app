@@ -1,8 +1,10 @@
 package com.alchemists.silicon_app;
 
+import android.content.Intent;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -14,7 +16,40 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Map;
+
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
+
+    private final class EchoWebSocketListener extends WebSocketListener {
+        private static final int NORMAL_CLOSURE_STATUS = 1000;
+
+        @Override
+        public void onOpen(WebSocket webSocket, Response response) {
+
+        }
+
+        public void updateDriverSingleton(String email, String name) {
+            DriverSingleton.get().setEmail(email);
+            DriverSingleton.get().setName(name);
+        }
+
+
+        @Override
+        public void onMessage(WebSocket webSocket, String text) {
+
+        }
+    }
+
+
 
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationClient;
@@ -26,6 +61,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.addMarker(new MarkerOptions().position(latest).title("My Loc"));
 
+    }
+    private void start() {
+        Request request = new Request.Builder().url("ws://10.177.7.176:3006/signinwsambulance").build();
+        MapsActivity.EchoWebSocketListener listener = new MapsActivity.EchoWebSocketListener();
+        WebSocket ws = client.newWebSocket(request, listener);
+        client.dispatcher().executorService().shutdown();
     }
 
     @Override

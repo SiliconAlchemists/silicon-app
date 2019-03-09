@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,6 +56,12 @@ public class TestSend extends AppCompatActivity {
         @Override
         public void onMessage(WebSocket webSocket, ByteString bytes) {
             output("Receiving bytes : " + bytes.hex());
+        }
+
+        @Override
+        public void onClosed(WebSocket webSocket, int code, String reason) {
+            super.onClosed(webSocket, code, reason);
+            Toast.makeText(getApplicationContext(), "Conn closed", Toast.LENGTH_SHORT).show();
         }
 
         @Override

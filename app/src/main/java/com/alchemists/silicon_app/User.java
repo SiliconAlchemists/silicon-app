@@ -3,6 +3,7 @@ package com.alchemists.silicon_app;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,7 +71,9 @@ public class User extends AppCompatActivity {
 
         @Override
         public void onMessage(WebSocket webSocket, String text) {
+//            Toast.makeText(User.this, text, Toast.LENGTH_SHORT).show();
 //            output("Receiving : " + text);
+            Log.d("UserReply",text);
         }
 
         @Override
@@ -90,7 +93,7 @@ public class User extends AppCompatActivity {
         }
     }
     private void start() {
-        Request request = new Request.Builder().url("ws://10.177.7.176:3006/signinws").build();
+        Request request = new Request.Builder().url("ws://10.177.7.176:3006/signinwsuser").build();
         User.EchoWebSocketListener listener = new User.EchoWebSocketListener();
         WebSocket ws = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();

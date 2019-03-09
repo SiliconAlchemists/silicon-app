@@ -39,6 +39,7 @@
             android:label="@string/title_activity_driver_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Ambulance" />
+        <activity android:name=".RegisterData" />
         <activity android:name=".User" />
         <activity android:name=".MainActivity">
             <intent-filter>

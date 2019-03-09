@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="edittext_details">
         <item name="android:layout_marginTop">30dp</item>
         <item name="android:textSize">20sp</item>
@@ -19,6 +20,7 @@
 
 
     </style>
+
     <style name="checkbox_details">
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:textSize">15sp</item>

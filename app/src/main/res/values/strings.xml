@@ -2,4 +2,5 @@
     <string name="app_name">Silicon-App</string>
     <string name="title_activity_driver_home">DriverHome</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_accel_data">AccelData</string>
 </resources>

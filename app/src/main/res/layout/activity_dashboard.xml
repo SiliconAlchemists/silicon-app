@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:layout_margin="20dp">
+        android:background="#424242">
 
 
 
@@ -19,11 +19,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello "
-        android:textSize="30sp"
+        android:textSize="40sp"
+        android:layout_gravity="left"
         tools:layout_editor_absoluteX="167dp"
         tools:layout_editor_absoluteY="98dp"
         tools:ignore="MissingConstraints"
-        android:layout_margin="30dp"/>
+        android:layout_margin="30dp"
+        android:textColor="#e0e0e0"
+        android:fontFamily="@font/pacifico"/>
 
     <TextView
         android:background="#00FF00"
@@ -57,6 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_gravity="left">
         <TextView
             android:id="@+id/details_text"

@@ -30,6 +30,7 @@ public class UserDashboard extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     JSONObject obj;
     public OkHttpClient client;
+    Location currLoc;
 
     private final class EchoWebSocketListener extends WebSocketListener {
         private static final int NORMAL_CLOSURE_STATUS = 1000;
@@ -102,6 +103,7 @@ public class UserDashboard extends AppCompatActivity {
                     public void onSuccess(Location location) {
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
+                            currLoc = location;
 //                            updateMap(location);
                             try {
                                 obj.put("latitude",location.getLatitude());

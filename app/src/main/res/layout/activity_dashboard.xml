@@ -48,7 +48,8 @@
         android:layout_margin="30sp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="302dp" />
+        tools:layout_editor_absoluteY="302dp"
+        android:onClick="sendSOS"/>
 
 
     <LinearLayout

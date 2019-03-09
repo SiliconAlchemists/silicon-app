@@ -110,6 +110,7 @@ public class DashboardActivity extends AppCompatActivity {
                                 obj.put("email",UserData.get().getEmail());
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                Log.d("jsonTag",e.toString());
                             }
 
                         }

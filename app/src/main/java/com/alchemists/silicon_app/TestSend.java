@@ -70,7 +70,7 @@ public class TestSend extends AppCompatActivity {
     }
 
     private void start() {
-        Request request = new Request.Builder().url("ws://10.177.7.176:8080").build();
+        Request request = new Request.Builder().url("ws://10.177.7.176:3006/echo").build();
         EchoWebSocketListener listener = new EchoWebSocketListener();
         WebSocket ws = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();

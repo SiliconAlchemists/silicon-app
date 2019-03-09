@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class EntryPointMain extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create a new intent to open the {@link NumbersActivity}
-                Intent userIntent = new Intent(MainActivity.this, User.class);
+                Intent userIntent = new Intent(EntryPointMain.this, UserSignIn.class);
 
                 // Start the new activity
                 startActivity(userIntent);
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create a new intent to open the {@link FamilyActivity}
-                Intent ambulanceIntent = new Intent(MainActivity.this, Ambulance.class);
+                Intent ambulanceIntent = new Intent(EntryPointMain.this, DriverSignIn.class);
 
                 // Start the new activity
                 startActivity(ambulanceIntent);

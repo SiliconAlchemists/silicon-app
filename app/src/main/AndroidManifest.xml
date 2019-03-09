@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DashboardActivity"></activity>
+        <activity android:name=".UserDashboard"></activity>
         <activity android:name=".TestSend" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -36,13 +36,13 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".DriverHome"
+            android:name=".pushDeletion"
             android:label="@string/title_activity_driver_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Ambulance" />
-        <activity android:name=".RegisterData" />
-        <activity android:name=".User" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".DriverSignIn" />
+        <activity android:name=".RegisterUser" />
+        <activity android:name=".UserSignIn" />
+        <activity android:name=".EntryPointMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

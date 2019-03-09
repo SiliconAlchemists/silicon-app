@@ -12,12 +12,16 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.StringReader;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 import okio.ByteString;
+
+import static org.xmlpull.v1.XmlPullParser.TEXT;
 
 public class Ambulance extends AppCompatActivity {
 
@@ -64,10 +68,20 @@ public class Ambulance extends AppCompatActivity {
         public void onMessage(WebSocket webSocket, String text) {
             //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
             Log.d("ReplyInfo",text);
+            try {
+
+                JSONObject obj = new JSONObject(text);
+
+                Log.d("MyApp", obj.toString());
+
+            } catch (Throwable t) {
+                Log.e("My App", "Could not parse malformed JSON: \"" + text + "\"");
+            }
             if(text!="404"){
                 DriverData.get().setEmail("nigger");
                 DriverData.get().setName("nish");
                 DriverData.get().setPhone("80533");
+
                 //start dashboard activity for driver
             }
             else {
@@ -75,7 +89,7 @@ public class Ambulance extends AppCompatActivity {
             }
             //convert text  to strings and assign em
 
-            
+
 
         }
 

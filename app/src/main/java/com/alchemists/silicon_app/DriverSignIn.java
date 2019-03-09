@@ -37,7 +37,6 @@ public class DriverSignIn extends AppCompatActivity {
     String emailVal;
     String passVal;
 
-    JSONObject student1;
 
     private final class EchoWebSocketListener extends WebSocketListener {
         private static final int NORMAL_CLOSURE_STATUS = 1000;
@@ -91,7 +90,7 @@ public class DriverSignIn extends AppCompatActivity {
                 loginReply.put("status","ready");
                 loginReply.put("email",obj.getString("email"));
 
-                webSocket.send(loginReply.toString());
+                //webSocket.send(loginReply.toString());
 
                 Intent i = new Intent(DriverSignIn.this,MapsActivity.class);
                 startActivity(i);
@@ -101,20 +100,6 @@ public class DriverSignIn extends AppCompatActivity {
             } catch (Throwable t) {
                 Log.e("My App", "Could not parse malformed JSON: \"" + text + "\"");
             }
-            /*if(text!="404"){
-                DriverSingleton.get().setEmail("nigger");
-                DriverSingleton.get().setName("nish");
-                DriverSingleton.get().setPhone("80533");
-
-                //start dashboard activity for driver
-            }
-            else {
-                //login failed
-            }*/
-            //convert text  to strings and assign em
-
-
-
         }
 
 

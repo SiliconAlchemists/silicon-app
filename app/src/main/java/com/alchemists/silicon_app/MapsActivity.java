@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.WebSocket;
@@ -29,22 +30,53 @@ import okhttp3.WebSocketListener;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
 
+    public OkHttpClient client;
+    Location currLocation;
+
+
     private final class EchoWebSocketListener extends WebSocketListener {
         private static final int NORMAL_CLOSURE_STATUS = 1000;
 
         @Override
         public void onOpen(WebSocket webSocket, Response response) {
+            JSONObject signedIn = new JSONObject();
+            try {
+                signedIn.put("status","ready");
+                signedIn.put("email",DriverSingleton.get().getEmail());
+                webSocket.send(signedIn.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-        }
 
-        public void updateDriverSingleton(String email, String name) {
-            DriverSingleton.get().setEmail(email);
-            DriverSingleton.get().setName(name);
         }
 
 
         @Override
         public void onMessage(WebSocket webSocket, String text) {
+
+            try {
+                JSONObject recievedObj = new JSONObject(text);
+                Log.d("JsonValue",recievedObj.toString());
+                if(recievedObj.getString("action").equals("getCurrentLocation")){
+                    JSONObject returnObj = new JSONObject();
+                    returnObj.put("status","locationResponse");
+                    returnObj.put("latitude",currLocation.getLatitude());
+                    returnObj.put("longitude",currLocation.getLongitude());
+                    returnObj.put("email",DriverSingleton.get().getEmail());
+                    webSocket.send(returnObj.toString());
+
+                }else if(recievedObj.getString("action").equals("startNavigation")){
+                    String userName = recievedObj.getString("name");
+                    String userPhone = recievedObj.getString("phone");
+                    String userLat = recievedObj.getString("latitude");
+                    String userLong = recievedObj.getString("longitude");
+                    Log.d("ReceivedInfo",recievedObj.toString());
+                }
+            } catch (JSONException e) {
+                Log.d("ExceptionRec",e.toString());
+                e.printStackTrace();
+            }
 
         }
     }
@@ -63,7 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
     private void start() {
-        Request request = new Request.Builder().url("ws://10.177.7.176:3006/signinwsambulance").build();
+        Request request = new Request.Builder().url("ws://10.177.7.176:3006/driverReady").build();
         MapsActivity.EchoWebSocketListener listener = new MapsActivity.EchoWebSocketListener();
         WebSocket ws = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();
@@ -84,10 +116,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     public void onSuccess(Location location) {
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
+                            currLocation = location;
                             updateMap(location);
                         }
                     }
                 });
+
+        client = new OkHttpClient();
+        start();
     }
 
 

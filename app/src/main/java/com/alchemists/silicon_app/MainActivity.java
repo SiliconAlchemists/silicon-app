@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(userIntent);
             }
         });
-        TextView family = findViewById(R.id.ambulance_button);
+        TextView ambulance = findViewById(R.id.ambulance_button);
 
         // Set a click listener on that View
-        family.setOnClickListener(new View.OnClickListener() {
+        ambulance.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the family category is clicked on.
             @Override
             public void onClick(View view) {

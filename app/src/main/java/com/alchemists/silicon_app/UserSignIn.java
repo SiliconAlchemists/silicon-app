@@ -70,7 +70,7 @@ public class UserSignIn extends AppCompatActivity {
 
         @Override
         public void onMessage(WebSocket webSocket, String text) {
-//           Log.d("ReplyInfo",text);
+           Log.d("ReplyInfo",text);
            String four="404ncc";
             JSONObject obj;
             try {
@@ -81,6 +81,9 @@ public class UserSignIn extends AppCompatActivity {
                 UserSingleton.get().setEmail(obj.getString("email"));
                 UserSingleton.get().setName(obj.getString("username"));
                 Intent DashboardIntent = new Intent(UserSignIn.this, UserDashboard.class);
+                Intent intent = new Intent(UserSignIn.this, AccelData.class);
+                UserSignIn.this.startService(intent);
+                startService(intent);
                 startActivity(DashboardIntent);
             }
             else {
@@ -130,7 +133,7 @@ public class UserSignIn extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create a new intent to open the {@link NumbersActivity}
-                Intent RegisterIntent = new Intent(UserSignIn.this, RegisterUser.class);
+                Intent RegisterIntent = new Intent(UserSignIn.this, AccelData.class);
 
                 // Start the new activity
                 startActivity(RegisterIntent);

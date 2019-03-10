@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="500dp"
+    tools:context=".ConfirmationActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Someone nearby is in distress"
+            android:layout_margin="20dp"
+            android:textSize="25sp"/>
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/img_view"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="45dp"
+            android:src="@drawable/siliconlogo"
+            />
+        <TextView
+            android:id="@+id/driverDialogDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Details:"
+            android:layout_below="@+id/img_view"
+            android:layout_marginLeft="25dp"
+            android:textSize="25sp"
+            />
+
+    <Button
+        android:id="@+id/startNav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="153dp"
+        android:layout_marginLeft="153dp"
+        android:layout_marginTop="413dp"
+        android:text="Start Nav" />
+</RelativeLayout>

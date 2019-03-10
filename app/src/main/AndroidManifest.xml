@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -22,8 +21,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".UserDashboard"></activity>
-        <activity android:name=".AccelData"></activity>
+        <service
+            android:name=".MyIntentService"
+            android:exported="false"/>
+        <activity android:name=".ConfirmationActivity"></activity>
+        <activity android:name=".UserDashboard" />
+        <activity android:name=".AccelData" />
         <activity android:name=".TestSend" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -40,6 +43,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
+
         <activity
             android:name=".pushDeletion"
             android:label="@string/title_activity_driver_home"

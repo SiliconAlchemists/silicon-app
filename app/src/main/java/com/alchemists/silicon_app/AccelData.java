@@ -73,6 +73,7 @@ public class AccelData extends Activity implements SensorEventListener {
             JSONObject rObj = new JSONObject();
 
             try {
+                rObj.put("action","gyro");
                 rObj.put("x",deltaX);
                 rObj.put("y",deltaY);
                 rObj.put("z",deltaZ);
@@ -88,12 +89,14 @@ public class AccelData extends Activity implements SensorEventListener {
             JSONObject rObj = new JSONObject();
 
             try {
+                rObj.put("action","gyro");
                 rObj.put("x",deltaX);
                 rObj.put("y",deltaY);
                 rObj.put("z",deltaZ);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            Log.d("NowSending","Now Sending");
             webSocket.send(rObj.toString());
 
         }
@@ -133,6 +136,8 @@ public class AccelData extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accel_data);
         initializeViews();
+
+        Log.d("AccelStarted","Accel Started");
 
         client = new OkHttpClient();
 

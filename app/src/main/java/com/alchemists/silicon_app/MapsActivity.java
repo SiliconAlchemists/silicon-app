@@ -1,10 +1,19 @@
 package com.alchemists.silicon_app;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -33,6 +42,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public OkHttpClient client;
     Location currLocation;
 
+    Button startBtn;
+
 
     private final class EchoWebSocketListener extends WebSocketListener {
         private static final int NORMAL_CLOSURE_STATUS = 1000;
@@ -53,11 +64,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         @Override
-        public void onMessage(WebSocket webSocket, String text) {
+        public void onMessage(WebSocket webSocket, String text){
 
             try {
                 JSONObject recievedObj = new JSONObject(text);
                 Log.d("JsonValue",recievedObj.toString());
+                Log.d("ActionVal",recievedObj.getString("action"));
                 if(recievedObj.getString("action").equals("getCurrentLocation")){
                     JSONObject returnObj = new JSONObject();
                     returnObj.put("status","locationResponse");
@@ -67,11 +79,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     webSocket.send(returnObj.toString());
 
                 }else if(recievedObj.getString("action").equals("startNavigation")){
+                    Log.d("StartNav","Start Nav");
+
                     String userName = recievedObj.getString("name");
                     String userPhone = recievedObj.getString("phone");
-                    String userLat = recievedObj.getString("latitude");
-                    String userLong = recievedObj.getString("longitude");
-                    Log.d("ReceivedInfo",recievedObj.toString());
+                    final String userLat = recievedObj.getString("latitude");
+                    final String userLong = recievedObj.getString("longitude");
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                            Uri.parse("http://maps.google.com/maps?saddr=20.344,34.34&daddr="+userLat+","+userLong+""));
+                    startActivity(intent);
+                    Log.d("StartNav","Start boii");
                 }
             } catch (JSONException e) {
                 Log.d("ExceptionRec",e.toString());
@@ -123,6 +140,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 });
 
         client = new OkHttpClient();
+        startBtn = findViewById(R.id.startBtn);
         start();
     }
 

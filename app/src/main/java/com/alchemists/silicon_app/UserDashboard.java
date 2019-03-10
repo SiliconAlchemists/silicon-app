@@ -31,7 +31,10 @@ public class UserDashboard extends AppCompatActivity {
     JSONObject obj;
     public OkHttpClient client;
     Location currLoc;
-
+    String driverName;
+    String driverPhone;
+    String driverLat;
+    String driverLongitude;
     private final class EchoWebSocketListener extends WebSocketListener {
         private static final int NORMAL_CLOSURE_STATUS = 1000;
 
@@ -44,39 +47,29 @@ public class UserDashboard extends AppCompatActivity {
 
         @Override
         public void onMessage(WebSocket webSocket, String text) {
-            /*
-        }
-//           Log.d("ReplyInfo",text);
-            String four="404ncc";
-            JSONObject obj;
-            try {
-                obj = new JSONObject(text);
 
-                if(text!=four){
-//                Log.d("ReplyInfo",text);
-                    UserSingleton.get().setEmail(obj.getString("email"));
-                    UserSingleton.get().setName(obj.getString("username"));
-                    Intent DashboardIntent = new Intent(UserSignIn.this, UserDashboard.class);
-                    startActivity(DashboardIntent);
-                }
-                else {
-                    //login failed
-                    Log.d("ReplyInfo","else");
-                }
-                //convert text  to strings and assign em
+            try {
+                JSONObject obj = new JSONObject(text);
+                driverName = obj.getString("name");
+                driverPhone = obj.getString("phone");
+                driverLat = obj.getString("latitude");
+                driverLongitude = obj.getString("longitude");
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.d("ReplyInfo","catch", e);
             }
-            */
         }
     }
 
 
     private void reqCon() {
         Request request = new Request.Builder().url("ws://10.177.7.176:3006/sos").build();
+        Request newReq = new Request.Builder().url("ws://10.177.7.176:3006/getGyroPhoneTest").build();
+
         UserDashboard.EchoWebSocketListener listener = new UserDashboard.EchoWebSocketListener();
+
         WebSocket ws = client.newWebSocket(request, listener);
+
+        WebSocket newWS = client.newWebSocket(newReq, listener);
         client.dispatcher().executorService().shutdown();
 
     }
@@ -109,6 +102,8 @@ public class UserDashboard extends AppCompatActivity {
                                 obj.put("latitude",location.getLatitude());
                                 obj.put("longitude",location.getLongitude());
                                 obj.put("email", UserSingleton.get().getEmail());
+
+                                reqCon();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Log.d("jsonTag",e.toString());
@@ -117,7 +112,6 @@ public class UserDashboard extends AppCompatActivity {
                         }
                     }
                 });
-        reqCon();
 
     }
     public String createSummery(){
